@@ -37,4 +37,8 @@ public class Employee {
     public String getTelephoneNumber () {
         return telephoneNumber ;
     }
+
+    private void showJobStatistics( int afterYears ) {
+        System.out.println( "After "+afterYears+ " years " + name + " can work for " + (59-age-afterYears) + " years more!!!" );
+    }
 }
