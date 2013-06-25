@@ -1,4 +1,5 @@
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -101,13 +102,26 @@ public class EmployeeValidator {
                     System.out.println("Bad Email ID:["+emailID+"]");
                 else
                     System.out.println("Email ID:["+emailID+"] OK");
+
+
+                Class[] methodParameters = new Class[]{Integer.TYPE};
+                Object[] parameters = new Object[]{new Integer(10)};
+
+                Method privateMethod = employee.getClass().getDeclaredMethod("showJobStatistics", methodParameters);
+                privateMethod.setAccessible(true);
+                privateMethod.invoke(employee, parameters) ;
+
             } catch (NoSuchFieldException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
             }
-            System.out.println("|--------------------------------------------|\n\n\n");
-        }
+            System.out.println("|--------------------------------------------|");
+                                                                                         }
     }
     public static boolean regexChecker(String regularExpression, String stringToCheck){
         Pattern checkRegex = Pattern.compile(regularExpression);
